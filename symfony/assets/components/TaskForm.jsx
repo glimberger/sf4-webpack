@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import classnames from 'classnames'
+import DisplayState from './DisplayState.jsx'
 
 const task = document.getElementById('task')
 const data = JSON.parse(atob(task.getAttribute('data-task')))
@@ -94,9 +95,7 @@ class TaskForm extends Component {
     }
     return (
       <form name='task' onSubmit={this.handleSubmit}>
-        <div className="alert alert-primary small" role="alert">
-          <pre className='mb-0'>{JSON.stringify(this.state, null, 2)}</pre>
-        </div>
+        <DisplayState state={this.state} />
         <div className="form-group">
           <label htmlFor="task">Task</label>
           <input type="text"
