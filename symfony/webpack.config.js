@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
+    home: './assets/scss/styles.scss',
     bootstrap_legacy: [
       './node_modules/jquery/dist/jquery.js',
       './node_modules/jquery-ui-bundle/jquery-ui.js',
@@ -14,6 +15,13 @@ module.exports = {
     bootstrap_esm: [
       './assets/js/bootstrap_esm.js',
       './assets/scss/styles.scss'
+    ],
+    boostrap_react: [
+      './assets/components/Container.jsx',
+      './assets/scss/styles.scss'
+    ],
+    form_react: [
+      './assets/components/TaskForm.jsx'
     ]
   },
   output: {
@@ -41,6 +49,16 @@ module.exports = {
           loader: "babel-loader",
           options: {
             presets: ["@babel/preset-env"]
+          }
+        }
+      },
+      {
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"]
           }
         }
       },

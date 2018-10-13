@@ -1,28 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('dist/home.css') }}">
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">{{ title }}</h1>
+        </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code></li>
-    </ul>
-    
-    Links:
-    <ul>
-        <li>
+        Links:
+        <ul>
             <li><a href="{{ path('bootstrap_legacy') }}">Bootstrap legacy</a></li>
             <li><a href="{{ path('bootstrap_esm') }}">Bootstrap ES modules</a></li>
-        </li>
-    </ul>
-</div>
+            <li><a href="{{ path('bootstrap_react') }}">Boostrap React component</a></li>
+            <li><a href="{{ path('form_react') }}">Form React</a></li>
+        </ul>
+    </div>
 {% endblock %}
