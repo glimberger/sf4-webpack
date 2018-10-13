@@ -12,11 +12,11 @@ const entry = {
     './assets/scss/styles.scss'
     ],
   boostrap_react: [
-    './assets/js/components/container.jsx',
+    './assets/components/Container.jsx',
     './assets/scss/styles.scss'
     ],
   form_react: [
-    './assets/js/components/TaskForm.jsx'
+    './assets/components/TaskForm.jsx'
     ]
 }
 
