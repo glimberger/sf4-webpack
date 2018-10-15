@@ -61,7 +61,7 @@ class DefaultController extends AbstractController
      *
      * @return Response
      */
-    public function newTaskForm()
+    public function newTaskForm(): Response
     {
         $task = new Task();
         $task->setTask('Write a blog post');

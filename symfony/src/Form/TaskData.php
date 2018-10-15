@@ -39,10 +39,10 @@ class TaskData
 
     public static function createFromRequest(Request $request): TaskData
     {
-        $task = $request->request->get('task');
-        $dueDate = $request->request->get('dueDate');
-        $foo = $request->request->get('foo');
-        $bar = $request->request->get('bar');
+        $task = $request->request->get('task', '');
+        $dueDate = $request->request->get('dueDate', '');
+        $foo = $request->request->get('foo', '');
+        $bar = $request->request->get('bar', '');
 
         return new self($task, $dueDate, $foo, $bar);
     }
