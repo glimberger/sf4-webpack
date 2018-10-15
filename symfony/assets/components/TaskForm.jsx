@@ -86,20 +86,28 @@ class TaskForm extends Component {
   }
 
   renderBars() {
-    const {foo, bar, bars} = this.state
+    const {foo, bar, bars, errors} = this.state
+    const inputBarClass = {
+      'form-control': true,
+      'is-invalid': errors.bar
+    }
+
     if (foo) {
       return (<div className='form-group'>
         <label htmlFor="bar">Bar</label>
         <select id='bar'
                 name='bar'
                 value={bar}
-                className={classnames({'form-control': true})}
+                className={classnames(inputBarClass)}
                 onChange={this.handleChange}
         >
           {bars.map((bar) => (
             <option value={bar.id} key={bar.id}>{bar.text}</option>
           ))}
         </select>
+        <div className="invalid-feedback">
+          {errors.bar}
+        </div>
       </div>)
     } else {
       return null
@@ -115,6 +123,10 @@ class TaskForm extends Component {
     const inputDueDateClass = {
       'form-control': true,
       'is-invalid': errors.dueDate
+    }
+    const inputFooClass = {
+      'form-control': true,
+      'is-invalid': errors.foo
     }
 
     return (
@@ -150,13 +162,16 @@ class TaskForm extends Component {
           <select id='foo'
                   name='foo'
                   value={foo}
-                  className={classnames({'form-control': true})}
+                  className={classnames(inputFooClass)}
                   onChange={this.handleChange}
           >
             {foos.map((foo) => (
               <option value={foo.id} key={foo.id}>{foo.text}</option>
             ))}
           </select>
+          <div className="invalid-feedback">
+            {errors.foo}
+          </div>
         </div>
         <ReactCSSTransitionGroup
           transitionName="example"
