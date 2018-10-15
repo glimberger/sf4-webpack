@@ -28,8 +28,12 @@ class TaskForm extends Component {
   }
 
   handleChange (event) {
-    const {name, value} = event.target
+    const {name, value, errors} = event.target
     this.setState({[name]: value})
+
+    if (value) {
+      this.setState({errors: {...errors, name: undefined}})
+    }
 
     if (name === 'foo') {
       this.fetchBars(value)
