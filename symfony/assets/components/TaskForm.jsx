@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 import classnames from 'classnames'
 import DisplayState from './DisplayState.jsx'
@@ -23,11 +24,12 @@ class TaskForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.fetchFoos = this.fetchFoos.bind(this)
     this.fetchBars = this.fetchBars.bind(this)
+    this.renderBars = this.renderBars.bind(this)
   }
 
   handleChange (event) {
     const {name, value} = event.target
-    this.setState({[name]: event.value})
+    this.setState({[name]: value})
 
     if (name === 'foo') {
       this.fetchBars(value)
@@ -83,8 +85,29 @@ class TaskForm extends Component {
     this.fetchBars(this.state.foo)
   }
 
+  renderBars() {
+    const {foo, bar, bars} = this.state
+    if (foo) {
+      return (<div className='form-group'>
+        <label htmlFor="bar">Bar</label>
+        <select id='bar'
+                name='bar'
+                value={bar}
+                className={classnames({'form-control': true})}
+                onChange={this.handleChange}
+        >
+          {bars.map((bar) => (
+            <option value={bar.id} key={bar.id}>{bar.text}</option>
+          ))}
+        </select>
+      </div>)
+    } else {
+      return null
+    }
+  }
+
   render () {
-    const {task, dueDate, foo, bar, errors, foos, bars} = this.state
+    const {task, dueDate, foo, errors, foos} = this.state
     const inputTaskClass = {
       'form-control': true,
       'is-invalid': errors.task
@@ -93,6 +116,7 @@ class TaskForm extends Component {
       'form-control': true,
       'is-invalid': errors.dueDate
     }
+
     return (
       <form name='task' onSubmit={this.handleSubmit}>
         <DisplayState state={this.state} />
@@ -134,19 +158,12 @@ class TaskForm extends Component {
             ))}
           </select>
         </div>
-        <div className='form-group'>
-          <label htmlFor="bar">Bar</label>
-          <select id='bar'
-                  name='bar'
-                  value={bar}
-                  className={classnames({'form-control': true})}
-                  onChange={this.handleChange}
-          >
-            {bars.map((bar) => (
-              <option value={bar.id} key={bar.id}>{bar.text}</option>
-            ))}
-          </select>
-        </div>
+        <ReactCSSTransitionGroup
+          transitionName="example"
+          transitionEnterTimeout={800}
+          transitionLeaveTimeout={800}>
+          {this.renderBars()}
+        </ReactCSSTransitionGroup>
         <button type="submit" className="btn btn-primary">Submit</button>
       </form>
     )
