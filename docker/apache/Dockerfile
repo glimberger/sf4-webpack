@@ -131,3 +131,10 @@ RUN set -xe \
 ARG PHP_INI=php.ini
 COPY $PHP_INI /usr/local/etc/php/
 # end PHP INI ----------------------------------------------------------------------------------------------------------
+
+# APACHE CONF ----------------------------------------------------------------------------------------------------------
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+# end APACHE CONF ------------------------------------------------------------------------------------------------------

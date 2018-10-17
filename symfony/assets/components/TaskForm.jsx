@@ -43,7 +43,7 @@ class TaskForm extends Component {
   handleSubmit (event) {
     event.preventDefault()
 
-    fetch('http://localhost:8085/public/ajax_form_react_validate', {
+    fetch('http://localhost:8085/ajax_form_react_validate', {
       method: 'POST',
       body: new FormData(event.target)
     })
@@ -58,7 +58,7 @@ class TaskForm extends Component {
   }
 
   fetchFoos() {
-    fetch('http://localhost:8085/public/ajax_foos')
+    fetch('http://localhost:8085/ajax_foos')
       .then(res => {
         if (!res.ok) { throw new Error(`${res.status} - ${res.statusText}`)}
         return res.json()
@@ -71,7 +71,7 @@ class TaskForm extends Component {
   fetchBars(fooID) {
     const formData = new FormData();
     formData.append('foo', fooID);
-    fetch('http://localhost:8085/public/ajax_bars', {
+    fetch('http://localhost:8085/ajax_bars', {
       method: 'POST',
       body: formData
     })
