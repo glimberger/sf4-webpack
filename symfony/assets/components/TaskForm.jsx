@@ -4,27 +4,23 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 import classnames from 'classnames'
 import DisplayState from './DisplayState.jsx'
-
-const task = document.getElementById('task')
-const data = JSON.parse(atob(task.getAttribute('data-task')))
+import populate from './populate.jsx'
 
 class TaskForm extends Component {
-  constructor () {
+  constructor ({initialState}) {
     super()
     this.state = {
-      task: data.task,
-      dueDate: data.dueDate,
-      foo: data.foo,
-      bar: data.bar,
+      task: initialState.task,
+      dueDate: initialState.dueDate,
+      foo: initialState.foo,
+      bar: initialState.bar,
       errors: {},
       foos: [],
       bars: []
-    }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.fetchFoos = this.fetchFoos.bind(this)
-    this.fetchBars = this.fetchBars.bind(this)
-    this.renderBars = this.renderBars.bind(this)
+    };
+    ['handleChange', 'handleSubmit', 'fetchFoos', 'renderBars'].forEach(propToBind => {
+      this[propToBind] = this[propToBind].bind(this)
+    })
   }
 
   handleChange (event) {
@@ -189,4 +185,6 @@ class TaskForm extends Component {
   }
 }
 
-ReactDOM.render(<TaskForm/>, task)
+const element = document.getElementById('task')
+const TaskFormWithData = populate(element)(TaskForm)
+ReactDOM.render(<TaskFormWithData/>, element)
