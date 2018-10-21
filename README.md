@@ -6,6 +6,8 @@ A playground for Symfony + webpack to experiment with:
 - load ES modules with global variables
 - load React modules
 
+See the [DEMO](https://sleepy-castle-87648.herokuapp.com/default) on Heroku
+
 Start the server:   
 ```bash
 make up
