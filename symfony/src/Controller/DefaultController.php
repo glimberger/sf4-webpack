@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -147,5 +148,35 @@ class DefaultController extends AbstractController
             ],
         ];
         return new JsonResponse($bars[$foo] ?? []);
+    }
+
+    /**
+     * @Route("/form_react_ref", name="form_react_ref")
+     *
+     * @param RouterInterface $router
+     * @return Response
+     */
+    public function newTaskFormRef(RouterInterface $router): Response
+    {
+        $task = new Task();
+        $task->setTask('Write a blog post');
+        $task->setDueDate(new \DateTime('tomorrow'));
+        $task->setFoo('foo1');
+        $task->setBar('bar11');
+
+        // Data object
+        $taskData = TaskData::create($task);
+
+        return $this->render('default/taskRef.form.html.twig', [
+            'data'  => $this->container->get('serializer')->serialize([
+                'task' => $taskData,
+                '_url' => [
+                    'fetchFoos' => $router->generate('ajax_foos'),
+                    'fetchBars' => $router->generate('ajax_bars_by_foo'),
+                    'validate'  => $router->generate('ajax_form_react_validate')
+                ],
+            ], 'json'),
+            'title' => 'Form React',
+        ]);
     }
 }

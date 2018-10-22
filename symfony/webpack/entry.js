@@ -17,7 +17,10 @@ const entry = {
     ],
   form_react: [
     './assets/components/TaskForm.jsx'
-    ]
+    ],
+  form_react_ref: [
+    './assets/components/TaskFormContainer.jsx'
+  ]
 }
 
 module.exports = entry
