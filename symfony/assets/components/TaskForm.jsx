@@ -41,7 +41,9 @@ class TaskForm extends Component {
 
     fetch('http://localhost:8085/ajax_form_react_validate', {
       method: 'POST',
-      body: new FormData(event.target)
+      body: new FormData(event.target),
+      credentials: 'include', // include cookies in the request
+      headers: {'X-Requested-With': 'XMLHttpRequest'} // for Symfony controllers to treat the request as an Ajax one
     })
       .then(res => {
         if (!res.ok) { throw new Error(`${res.status} - ${res.statusText}`)}
@@ -54,7 +56,10 @@ class TaskForm extends Component {
   }
 
   fetchFoos() {
-    fetch('http://localhost:8085/ajax_foos')
+    fetch('http://localhost:8085/ajax_foos', {
+      credentials: 'include', // include cookies in the request
+      headers: {'X-Requested-With': 'XMLHttpRequest'} // for Symfony controllers to treat the request as an Ajax one
+    })
       .then(res => {
         if (!res.ok) { throw new Error(`${res.status} - ${res.statusText}`)}
         return res.json()
@@ -69,7 +74,9 @@ class TaskForm extends Component {
     formData.append('foo', fooID);
     fetch('http://localhost:8085/ajax_bars', {
       method: 'POST',
-      body: formData
+      body: formData,
+      credentials: 'include', // include cookies in the request
+      headers: {'X-Requested-With': 'XMLHttpRequest'} // for Symfony controllers to treat the request as an Ajax one
     })
       .then(res => {
         if (!res.ok) { throw new Error(`${res.status} - ${res.statusText}`)}

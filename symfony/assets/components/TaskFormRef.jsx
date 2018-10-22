@@ -59,7 +59,9 @@ class TaskFormRef extends Component {
 
     fetch(this.state._url.validate, {
       method: 'POST',
-      body: new FormData(event.target)
+      body: new FormData(event.target),
+      credentials: 'include', // include cookies in the request
+      headers: {'X-Requested-With': 'XMLHttpRequest'} // for Symfony controllers to treat the request as an Ajax one
     })
       .then(res => {
         if (!res.ok) {
@@ -74,7 +76,10 @@ class TaskFormRef extends Component {
   }
 
   fetchFoos () {
-    fetch(this.state._url.fetchFoos)
+    fetch(this.state._url.fetchFoos, {
+      credentials: 'include', // include cookies in the request
+      headers: {'X-Requested-With': 'XMLHttpRequest'} // for Symfony controllers to treat the request as an Ajax one
+    })
       .then(res => {
         if (!res.ok) {
           throw new Error(`${res.status} - ${res.statusText}`)
@@ -92,7 +97,9 @@ class TaskFormRef extends Component {
 
     fetch(this.state._url.fetchBars, {
       method: 'POST',
-      body: formData
+      body: formData,
+      credentials: 'include', // include cookies in the request
+      headers: {'X-Requested-With': 'XMLHttpRequest'} // for Symfony controllers to treat the request as an Ajax one
     })
       .then(res => {
         if (!res.ok) {
