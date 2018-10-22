@@ -56,7 +56,7 @@ cc:
 
 composer:       ## Composer update
 composer:
-	@$(RUN) composer update
+	@$(RUN) php -d memory_limit=-1 /usr/local/bin/composer update
 
 console:        ## Console command (ex: make console CMD="debug:container")
 console:
