@@ -8,28 +8,31 @@ A playground for Symfony + webpack to experiment with:
 
 See the [DEMO](https://sleepy-castle-87648.herokuapp.com/default) on Heroku
 
-Start the server:   
+Start the server:
+
 ```bash
 make up
 ```
 
 Open : `http://localhost:8085/public`
 
-Stop the server:   
+Stop the server:
+
 ```bash
 make stop
 ```
 
-Command list:   
+Command list:
+
 ```bash
 make
 ```
 
-Start watching with webpack:   
+Start watching with webpack:
+
 ```bash
 # enter apache container
 make app
 # then start webpack
 yarn watch
 ```
-
