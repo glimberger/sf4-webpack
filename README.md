@@ -17,7 +17,7 @@ Install locally (using Docker)
 make up
 ```
 
-App available at `http://localhost:8085/public`
+App available at `http://localhost:8085
 
 ```bash
 # stop the server
