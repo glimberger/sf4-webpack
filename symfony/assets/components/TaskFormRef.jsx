@@ -25,7 +25,7 @@ class TaskFormRef extends Component {
   }
 
   initState (data) {
-    const {task, _url} = data
+    const {task, foos, bars, _url} = data
 
     if (!data) { return }
 
@@ -34,11 +34,10 @@ class TaskFormRef extends Component {
       dueDate: task.dueDate,
       foo: task.foo,
       bar: task.bar,
+      foos,
+      bars,
       _url
     })
-
-    this.fetchFoos()
-    this.fetchBars(this.state.foo)
   }
 
   handleChange (event) {

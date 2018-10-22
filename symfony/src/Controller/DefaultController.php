@@ -164,12 +164,45 @@ class DefaultController extends AbstractController
         $task->setFoo('foo1');
         $task->setBar('bar11');
 
+        $foos = [
+            ['id' => '', 'text' => 'Sélectionnez un foo'],
+            ['id' => 'foo1', 'text' => 'FOO 1'],
+            ['id' => 'foo2', 'text' => 'FOO 2'],
+            ['id' => 'foo3', 'text' => 'FOO 3'],
+        ];
+
+        $bars = [
+            '' => [
+                ['id' => '', 'text' => 'Pas de bar 🙁'],
+            ],
+            'foo1' => [
+                ['id' => '', 'text' => 'Sélectionnez un bar'],
+                ['id' => 'bar11', 'text' => 'BAR 11'],
+                ['id' => 'bar12', 'text' => 'BAR 12'],
+                ['id' => 'bar13', 'text' => 'BAR 13'],
+            ],
+            'foo2' => [
+                ['id' => '', 'text' => 'Sélectionnez un bar'],
+                ['id' => 'bar21', 'text' => 'BAR 21'],
+                ['id' => 'bar22', 'text' => 'BAR 22'],
+                ['id' => 'bar23', 'text' => 'BAR 23'],
+            ],
+            'foo3' => [
+                ['id' => '', 'text' => 'Sélectionnez un bar'],
+                ['id' => 'bar31', 'text' => 'BAR 31'],
+                ['id' => 'bar32', 'text' => 'BAR 32'],
+                ['id' => 'bar33', 'text' => 'BAR 33'],
+            ],
+        ];
+
         // Data object
         $taskData = TaskData::create($task);
 
         return $this->render('default/taskRef.form.html.twig', [
             'data'  => $this->container->get('serializer')->serialize([
                 'task' => $taskData,
+                'foos' => $foos,
+                'bars' => $bars[$taskData->foo],
                 '_url' => [
                     'fetchFoos' => $router->generate('ajax_foos'),
                     'fetchBars' => $router->generate('ajax_bars_by_foo'),
