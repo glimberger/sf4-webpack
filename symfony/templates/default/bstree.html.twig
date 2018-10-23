@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">{{ title }}</h1>
+            <p>Twig template + React component with jQuery plugin integration (<a href="https://www.npmjs.com/package/bs-tree">bs-tree</a>)</p>
+            <p><a href="{{ path('default') }}">Home</a></p>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div id="mytree"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('dist/react_tree.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('dist/react_tree.js') }}"></script>
+{% endblock %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}

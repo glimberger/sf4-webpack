@@ -212,4 +212,16 @@ class DefaultController extends AbstractController
             'title' => 'Form React',
         ]);
     }
+
+    /**
+     * @Route("/react_tree", name="react_tree")
+     *
+     * @return Response
+     */
+    public function reactTree()
+    {
+        return $this->render('default/bstree.html.twig', [
+           'title' => 'React with jQuery plugin integration'
+        ]);
+    }
 }
