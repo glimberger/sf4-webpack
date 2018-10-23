@@ -8,5 +8,5 @@ services:
       - "8085:80"
     restart: always
     volumes:
-      - ./symfony:/var/www/html
+      - ./:/var/www/html
       - ~/.composer:/root/.composer
